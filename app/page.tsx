@@ -1,113 +1,176 @@
-import Image from "next/image";
+'use client'
+import HeroMobileCarusel from "@/components/HeroCarusel/HeroMobileCarusel";
+import HeroCarusel from "../components/HeroCarusel"
+import RangeSlider from "@/components/RangeSlider";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import CustomTabs from "@/components/CustomTabs";
+import { Product } from "@/components/Product/Product";
+import { Pagination, Popover } from "antd";
+import Loading from "../components/Loading/Loading"
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+interface CategoryType {
+   id: string;
+   title: string;
+   count: string;
 }
+
+interface ProductType {
+   id: string;
+   title: string;
+   price: string;
+   image: string;
+}
+
+function Home() {
+   const [arrow, setArrow] = useState<string>('Show');
+   const [categoryData, setCategoryData] = useState<Array<CategoryType>>([])
+   const [sizeData, setSizeData] = useState<Array<CategoryType>>([])
+   const [products, setProducts] = useState<Array<ProductType>>([])
+   const [tagId, setTagId] = useState<string>("")
+   const [isLoading, setIsLoading] = useState(false)
+   const [categoryId, setCategoryId] = useState<string>('')
+   const [sizeId, setSizeId] = useState<string>("0")
+   const [sortProduct, setSortProduct] = useState("")
+
+   const mergedArrow = useMemo(() => {
+      if (arrow === 'Hide') {
+         return false;
+      }
+
+      if (arrow === 'Show') {
+         return true;
+      }
+
+      return {
+         pointAtCenter: true,
+      };
+   }, [arrow]);
+
+   const handleSortClick = (value:string) => {
+      setIsLoading(true);
+      setTimeout(() => {
+         setSortProduct(value)
+      }, 500);
+   }  
+
+   const handleCategoryClick = (id: string) => {
+      setIsLoading(true);
+      setTagId("")
+      setSizeId("")
+      setTimeout(() => {
+         setCategoryId(id)
+      }, 500);
+   }
+
+   const handleSizeClick = (id: string) => {
+      setIsLoading(true);
+      if (id == "1") {
+         setTimeout(() => {
+            setCategoryId("");
+            setTagId("1");
+            setSizeId("")
+         }, 500);
+      } else {
+         setTimeout(() => {
+            setCategoryId("");
+            setTagId("");
+            setSizeId(id)
+         }, 500);
+      }
+   }
+
+   useEffect(() => {
+      axios.get(`http://localhost:3001/categoryies`).then(res => {
+         setCategoryData(res.data);
+      })
+      axios.get(`http://localhost:3001/sizes`).then(res => {
+         setSizeData(res.data);
+      })
+   }, [])
+
+   useEffect(() => {
+      axios.get(`http://localhost:3001/plant-products?_sort=${sortProduct}&categoryId=${categoryId}&tagId=${tagId}&sizeId=${sizeId}`).then(res => {
+         setIsLoading(false);
+         setProducts(res.data.map((item: any) => {
+            return {
+               id: item.id,
+               title: item.title,
+               price: item.price,
+               image: item.images[3]
+            }
+         }));
+      }).catch(err => { setIsLoading(false) })
+   }, [categoryId, tagId, sizeId, sortProduct])
+
+   return (
+      <>
+         <section className="pt-[12px] pb-[46px]">
+            <div className="container">
+               <HeroCarusel />
+               <HeroMobileCarusel />
+            </div>
+         </section>
+         <section className="">
+            <div className="container">
+               <div className="flex justify-between gap-[50px]">
+                  <div className="w-[25%] bg-[#FBFBFB]">
+                     <div className="px-[15px]">
+                        <h2 className="font-bold text-[18px] leading-[16px] text-[#3D3D3D]">Categories</h2>
+                        <ul className="pl-[12px] space-y-[15px] mt-[20px]  mb-[36px]">
+                           {categoryData && Array.isArray(categoryData) && categoryData.length > 0 && categoryData.map((item: CategoryType) => (
+                              <li key={item.id} onClick={() => handleCategoryClick(item.id)} className={`${categoryId == item.id ? "text-[#46a358]" : ""} flex items-center cursor-pointer justify-between" key={item.id}`}>
+                                 <span>{item.title}</span>
+                                 <span>({item.count})</span>
+                              </li>
+                           ))}
+                        </ul>
+                        <h2 className="font-bold text-[18px] leading-[16px] text-[#3D3D3D] mb-[20px]">Price Range</h2>
+                        <RangeSlider />
+                        <h2 className="font-bold text-[18px] leading-[16px] text-[#3D3D3D] mt-[46px]">Size</h2>
+                        <ul className="pl-[12px] space-y-[15px] mt-[20px]  mb-[36px]">
+                           {sizeData && Array.isArray(sizeData) && sizeData.length > 0 && sizeData.map((item: CategoryType) => (
+                              <li onClick={() => handleSizeClick(item.id)} className={`flex items-center justify-between cursor-pointer ${sizeId == item.id ? 'text-[#46a368]' : ''}`} key={item.id}>
+                                 <span>{item.title}</span>
+                                 <span>({item.count})</span>
+                              </li>
+                           ))}
+                        </ul>
+                     </div>
+                     <Link href={"#"}>
+                        <img src="/plant-aside.jpg" alt="Plant Aside" width={"100%"} height={470} />
+                     </Link>
+                  </div>
+                  <div className="w-[75%]">
+                     <div className="flex items-center justify-between">
+                        <CustomTabs setSizeId={setSizeId} setCategoryId={setCategoryId} setIsLoading={setIsLoading} setTagId={setTagId} />
+                        <div className="flex items-center cursor-pointer">
+                           <span>Short by:</span>
+                           <Popover placement="bottom" title={""} content={<ul className="space-y-3 w-[150px] text-center">
+                              <li onClick={() => handleSortClick("title")} className="hover:scale-110 cursor-pointer duration-300 hover:font-bold">Title sort</li>
+                              <li onClick={() => handleSortClick("price")} className="hover:scale-110 cursor-pointer duration-300 hover:font-bold">Price sort</li>
+                           </ul>} arrow={mergedArrow}>
+                              <h2>Default sorting</h2>
+                           </Popover>
+                        </div>
+                     </div>
+                     <ul className="mt-[31px] flex gap-[30px] flex-wrap">
+                        {isLoading ? <Loading/> : products.length ?
+                           products.map((item: ProductType) => (
+                              <Product key={item.id} id={item.id} image={item.image} price={item.price} title={item.title} />
+                           )) : <strong>EMPTY...</strong>
+                        }
+                     </ul>
+                     <div className="mt-[90px] flex justify-end">
+                        <Pagination defaultCurrent={1} total={50} />
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </>
+   );
+}
+
+export default Home

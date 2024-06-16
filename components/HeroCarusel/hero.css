@@ -1,0 +1,55 @@
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            padding-left: 40px;
+            font-size: 18px;
+            background-color: #f9f9f9;
+            display: flex;
+            background-image: url(../../public/hero-planet.png);
+            background-repeat: no-repeat;
+            background-size: 518px;
+            background-position: right center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .swiper-pagination-bullet-active-main {
+            background: #46A358 !important;
+        }
+        
+        .hero-mobile-banner {
+            padding-left: 23px;
+            background-image: url("../../public/hero.png"), url("../../public/hero-mobile-bg.png");
+            background-repeat: no-repeat;
+            border-radius: 30px;
+            background-size: 115%, 180px;
+            background-position: center, right center;
+            background-color: transparent;
+        }
+        
+        .hamburger-bg {
+            background-image: url(../../public/hero.png);
+            background-repeat: no-repeat;
+            background-size: 200%;
+        }
+        
+        .ant-slider-track {
+            background-color: #46A358 !important;
+        }
+        
+        .ant-slider-handle::before,
+        .ant-slider-handle::after {
+            background-color: #46A358 !important;
+            border-radius: 50%;
+        }
